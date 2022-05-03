@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [vue()],
   server:{
     port:4000
-  }
+  },
+  base:'/mangosteen-fe/dist/'
 })

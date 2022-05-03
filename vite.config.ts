@@ -7,5 +7,5 @@ export default defineConfig({
   server:{
     port:4000
   },
-  base:'/mangosteen-fe/dist/'
+  // base:'/mangosteen-fe/dist/'
 })

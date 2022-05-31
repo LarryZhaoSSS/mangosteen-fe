@@ -1,0 +1,239 @@
+From 4d7b4cee6c5d908406b4e0819e15fc698c353834 Mon Sep 17 00:00:00 2001
+From: frankfang <frankfang1990@gmail.com>
+Date: Thu, 7 Apr 2022 23:02:07 +0800
+Subject: [PATCH] =?UTF-8?q?=E7=A9=B6=E6=9E=81=E9=87=8D=E6=9E=84?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ src/components/welcome/First.tsx         | 33 ++++++++++-----------
+ src/components/welcome/Forth.tsx         | 35 ++++++++++------------
+ src/components/welcome/Second.tsx        | 36 +++++++++++------------
+ src/components/welcome/Third.tsx         | 37 ++++++++++++------------
+ src/components/welcome/WelcomeLayout.tsx | 32 ++++++++++----------
+ 5 files changed, 81 insertions(+), 92 deletions(-)
+
+diff --git a/src/components/welcome/First.tsx b/src/components/welcome/First.tsx
+index 4d21225..4335f48 100644
+--- a/src/components/welcome/First.tsx
++++ b/src/components/welcome/First.tsx
+@@ -1,21 +1,18 @@
+-import { defineComponent } from 'vue';
+-import s from './First.module.scss';
++import s from './WelcomeLayout.module.scss';
+ import pig from '../../assets/icons/pig.svg';
+ import { WelcomeLayout } from './WelcomeLayout'
+ import { RouterLink } from 'vue-router';
+-export const First = defineComponent({
+-  setup: (props, context) => {
+-    const slots = {
+-      icon: () => <img src={pig} />,
+-      title: () => <h2>会挣钱<br />还会省钱</h2>,
+-      buttons: () => <>
+-        <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
+-        <RouterLink to="/welcome/2" >下一页</RouterLink>
+-        <RouterLink to="/start" >跳过</RouterLink>
+-      </>
+-    }
+-    return () => (
+-      <WelcomeLayout v-slots={slots}></WelcomeLayout>
+-    )
+-  }
+-})
+\ No newline at end of file
++import { FunctionalComponent } from 'vue';
++export const First: FunctionalComponent = () => {
++  return <WelcomeLayout>{{
++    icon: () => <img src={pig} />,
++    title: () => <h2>会挣钱<br />还会省钱</h2>,
++    buttons: () => <>
++      <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
++      <RouterLink to="/welcome/2" >下一页</RouterLink>
++      <RouterLink to="/start" >跳过</RouterLink>
++    </>
++  }}</WelcomeLayout>
++}
++
++First.displayName = 'First'
+diff --git a/src/components/welcome/Forth.tsx b/src/components/welcome/Forth.tsx
+index dc055a8..2ea4598 100644
+--- a/src/components/welcome/Forth.tsx
++++ b/src/components/welcome/Forth.tsx
+@@ -1,23 +1,20 @@
+-import { defineComponent } from 'vue';
+-import s from './First.module.scss';
++import s from './WelcomeLayout.module.scss';
+ import cloud from '../../assets/icons/cloud.svg';
+ import { RouterLink } from 'vue-router';
+ import { WelcomeLayout } from './WelcomeLayout';
+-export const Forth = defineComponent({
+-  setup: (props, context) => {
+-    return () => (
+-      <WelcomeLayout>
+-        {{
+-          icon: () => <img class={s.icon} src={cloud} />,
+-          title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
+-          buttons: () => <>
+-            <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
+-            <RouterLink to="/start" >完成</RouterLink>
+-            <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
+-          </>
++export const Forth = () => (
++  <WelcomeLayout>
++    {{
++      icon: () => <img class={s.icon} src={cloud} />,
++      title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
++      buttons: () => <>
++        <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
++        <RouterLink to="/start" >完成</RouterLink>
++        <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
++      </>
+ 
+-        }}
+-      </WelcomeLayout>
+-    )
+-  }
+-})
+\ No newline at end of file
++    }}
++  </WelcomeLayout>
++)
++
++Forth.displayName = 'Forth'
+\ No newline at end of file
+diff --git a/src/components/welcome/Second.tsx b/src/components/welcome/Second.tsx
+index a57e2c5..3a3589a 100644
+--- a/src/components/welcome/Second.tsx
++++ b/src/components/welcome/Second.tsx
+@@ -1,22 +1,20 @@
+-import { defineComponent } from 'vue';
+-import s from './First.module.scss';
++import s from './WelcomeLayout.module.scss';
+ import clock from '../../assets/icons/clock.svg';
+ import { RouterLink } from 'vue-router';
+ import { WelcomeLayout } from './WelcomeLayout';
+-export const Second = defineComponent({
+-  setup: (props, context) => {
+-    return () => (
+-      <WelcomeLayout>
+-        {{
+-          icon: () => <img class={s.icon} src={clock} />,
+-          title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
+-          buttons: () => <>
+-            <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
+-            <RouterLink to="/welcome/3" >下一页</RouterLink>
+-            <RouterLink to="/start" >跳过</RouterLink>
+-          </>
+-        }}
+-      </WelcomeLayout>
+-    )
+-  }
+-})
+\ No newline at end of file
++export const Second = () => (
++  <WelcomeLayout>
++    {{
++      icon: () => <img class={s.icon} src={clock} />,
++      title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
++      buttons: () => <>
++        <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
++        <RouterLink to="/welcome/3" >下一页</RouterLink>
++        <RouterLink to="/start" >跳过</RouterLink>
++      </>
++    }}
++  </WelcomeLayout>
++)
++
++
++Second.displayName = 'Second'
+\ No newline at end of file
+diff --git a/src/components/welcome/Third.tsx b/src/components/welcome/Third.tsx
+index 98d0e57..326a813 100644
+--- a/src/components/welcome/Third.tsx
++++ b/src/components/welcome/Third.tsx
+@@ -1,22 +1,21 @@
+-import { defineComponent } from 'vue';
+-import s from './First.module.scss';
++import s from './WelcomeLayout.module.scss';
+ import chart from '../../assets/icons/chart.svg';
+ import { RouterLink } from 'vue-router';
+ import { WelcomeLayout } from './WelcomeLayout';
+-export const Third = defineComponent({
+-  setup: (props, context) => {
+-    return () => (
+-      <WelcomeLayout>
+-        {{
+-          icon: () => <img class={s.icon} src={chart} />,
+-          title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
+-          buttons: () => <>
+-            <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
+-            <RouterLink to="/welcome/4" >下一页</RouterLink>
+-            <RouterLink to="/start" >跳过</RouterLink>
+-          </>
+-        }}
+-      </WelcomeLayout>
+-    )
+-  }
+-})
+\ No newline at end of file
++export const Third = () => {
++  return (
++    <WelcomeLayout>
++      {{
++        icon: () => <img class={s.icon} src={chart} />,
++        title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
++        buttons: () => <>
++          <RouterLink class={s.fake} to="/start" >跳过</RouterLink>
++          <RouterLink to="/welcome/4" >下一页</RouterLink>
++          <RouterLink to="/start" >跳过</RouterLink>
++        </>
++      }}
++    </WelcomeLayout>
++  )
++}
++
++Third.displayName = 'Third'
+\ No newline at end of file
+diff --git a/src/components/welcome/WelcomeLayout.tsx b/src/components/welcome/WelcomeLayout.tsx
+index 8a578aa..9ed9802 100644
+--- a/src/components/welcome/WelcomeLayout.tsx
++++ b/src/components/welcome/WelcomeLayout.tsx
+@@ -1,18 +1,16 @@
+-import { defineComponent } from 'vue';
+-import s from './First.module.scss';
+-export const WelcomeLayout = defineComponent({
+-  setup: (props, context) => {
+-    const {slots} = context
+-    return () => (
+-      <div class={s.wrapper}>
+-        <div class={s.card}>
+-          {slots.icon?.()} 
+-          {slots.title?.()}
+-        </div>
+-        <div class={s.actions}>
+-          {slots.buttons?.()}
+-        </div>
++import { FunctionalComponent } from 'vue';
++import s from './WelcomeLayout.module.scss';
++export const WelcomeLayout: FunctionalComponent = (props, context) => {
++  const { slots: { icon, title, buttons } } = context
++  return (
++    <div class={s.wrapper}>
++      <div class={s.card}>
++        {icon?.()}
++        {title?.()}
+       </div>
+-    )
+-  }
+-})
+\ No newline at end of file
++      <div class={s.actions}>
++        {buttons?.()}
++      </div>
++    </div>
++  )
++}
+-- 
+2.35.2
+

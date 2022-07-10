@@ -1,20 +1,43 @@
 import { defineComponent, h, ref, Transition, VNode, watchEffect } from "vue";
-import { RouteLocationNormalizedLoaded, RouterView } from "vue-router";
+import {
+  RouteLocationNormalizedLoaded,
+  RouterView,
+  useRoute,
+  useRouter,
+} from "vue-router";
 import s from "./Welcome.module.scss";
-import { useSwipe } from '../hooks/useSwipe';
+import { useSwipe } from "../hooks/useSwipe";
+import { throttle } from "../shared/throttle";
+const pushMap: Record<string, string> = {
+  Welcome1: "/welcome/2",
+  Welcome2: "/welcome/3",
+  Welcome3: "/welcome/4",
+  Welcome4: "/start",
+};
 export const Welcome = defineComponent({
   setup: (props, context) => {
-    const main = ref<HTMLElement|null>(null)
-    const {direction,swiping} = useSwipe(main)
-    watchEffect(()=>{
-      console.log(direction.value)
-    })
+    const main = ref<HTMLElement | undefined>();
+    const { direction, swiping } = useSwipe(main, {
+      beforeStart: (e) => e.preventDefault(),
+    });
+    const route = useRoute();
+    const router = useRouter();
+    const replace = throttle(() => {
+      const name = (route.name || "Welcome1").toString();
+      router.replace(pushMap[name]);
+    }, 500);
+    watchEffect(() => {
+      if (swiping.value && direction.value === "left") {
+        console.log("---next page---");
+        replace();
+      }
+    });
     return () => (
       <div class={s.wrapper}>
         <header>
-                <svg>
-          <use xlinkHref='#mangosteen'></use>
-        </svg>
+          <svg>
+            <use xlinkHref="#mangosteen"></use>
+          </svg>
           <h1>山竹记账</h1>
         </header>
         <main class={s.main} ref={main}>

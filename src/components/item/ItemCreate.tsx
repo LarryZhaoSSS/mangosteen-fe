@@ -1,9 +1,19 @@
 import { defineComponent } from 'vue';
-import s from './ItemCreate.scss'
+import { MainLayout } from '../../layouts/MainLayout';
+import { Icon } from '../../shared/Icon';
+import s from './ItemCreate.module.scss'
 export const ItemCreate = defineComponent({
     setup(props,context){
         return ()=>(
-            <div >Item Create</div>
+            <MainLayout>
+            {
+                {
+                    title:()=>'记一笔',
+                    icon:()=><Icon name="left" class={s.navIcon} />,
+                    default:()=><div>main</div>
+                }
+            }
+        </MainLayout>
         )
     }
 })

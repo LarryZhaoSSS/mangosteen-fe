@@ -1,6 +1,8 @@
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { Icon } from "../../shared/Icon";
 import s from "./InputPad.module.scss";
+import { DatetimePicker, Popup } from "vant";
+import { time } from "../../shared/time";
 export const InputPad = defineComponent({
   setup(props, context) {
     const buttons = [
@@ -70,19 +72,48 @@ export const InputPad = defineComponent({
         onclick: () => {},
       },
     ];
+    const refDatePickerVisible = ref(false);
+    const refDate = ref(new Date());
+    const showDatePicker = ()=>{
+        refDatePickerVisible.value = true;
+    }
+    const hideDatePicker = ()=>{
+        refDatePickerVisible.value = false;
+    }
+    const setDate = (date:Date)=>{
+        refDate.value = date
+                      hideDatePicker()
+    }
     return () => (
       <>
         <div class={s.dateAndAmount}>
           <span class={s.date}>
             <Icon name="date" class={s.icon} />
-            <span>2022-01-01</span>
+            <span>
+              <span
+                onClick={showDatePicker}
+              >
+                {time(refDate.value).format()}
+              </span>
+              <Popup position="bottom" v-model:show={refDatePickerVisible.value}>
+                <DatetimePicker
+                  value={refDate.value}
+                  type="date"
+                  title="选择年月日"
+                  onConfirm={setDate}
+                  onCancel={hideDatePicker}
+                />
+              </Popup>
+            </span>
           </span>
           <div class={s.amount}>1000.00</div>
         </div>
         <div class={s.buttons}>
-          {
-              buttons.map(button=><button key={button.text} onClick={button.onclick}>{button.text}</button>)
-          }
+          {buttons.map((button) => (
+            <button key={button.text} onClick={button.onclick}>
+              {button.text}
+            </button>
+          ))}
         </div>
       </>
     );

@@ -5,73 +5,6 @@ import { DatetimePicker, Popup } from "vant";
 import { time } from "../../shared/time";
 export const InputPad = defineComponent({
   setup(props, context) {
-    const buttons = [
-      {
-        text: "1",
-        onclick: () => {},
-      },
-      {
-        text: "2",
-        onclick: () => {},
-      },
-      {
-        text: "3",
-        onclick: () => {},
-      },
-      {
-        text: "清空",
-        onclick: () => {},
-      },
-      {
-        text: "4",
-        onclick: () => {},
-      },
-
-      {
-        text: "5",
-        onclick: () => {},
-      },
-      {
-        text: "6",
-        onclick: () => {},
-      },
-      {
-        text: "+",
-        onclick: () => {},
-      },
-      {
-        text: "7",
-        onclick: () => {},
-      },
-      {
-        text: "8",
-        onclick: () => {},
-      },
-      {
-        text: "9",
-        onclick: () => {},
-      },
-      {
-        text: "-",
-        onclick: () => {},
-      },
-      {
-        text: ".",
-        onclick: () => {},
-      },
-      {
-        text: "0",
-        onclick: () => {},
-      },
-      {
-        text: "删",
-        onclick: () => {},
-      },
-      {
-        text: "提交",
-        onclick: () => {},
-      },
-    ];
     const refDatePickerVisible = ref(false);
     const refDate = ref(new Date());
     const showDatePicker = ()=>{
@@ -84,6 +17,91 @@ export const InputPad = defineComponent({
         refDate.value = date
                       hideDatePicker()
     }
+    const refAmount = ref('')
+    const appendText = (n:number | string)=>{
+        refAmount.value += n.toString()
+    }
+    const buttons = [
+      {
+        text: "1",
+        onclick: () => {
+            appendText(1)
+        },
+      },
+      {
+        text: "2",
+        onclick: () => {
+            appendText(2)
+        },
+      },
+      {
+        text: "3",
+        onclick: () => {
+            appendText(3)
+        },
+      },
+      
+      {
+        text: "4",
+        onclick: () => {
+            appendText(4)
+        },
+      },
+
+      {
+        text: "5",
+        onclick: () => {
+            appendText(5)
+        },
+      },
+      {
+        text: "6",
+        onclick: () => {
+            appendText(6)
+        },
+      },
+      
+      {
+        text: "7",
+        onclick: () => {
+            appendText(7)
+        },
+      },
+      {
+        text: "8",
+        onclick: () => {
+            appendText(8)
+        },
+      },
+      {
+        text: "9",
+        onclick: () => {
+            appendText(9)
+        },
+      },
+      
+      {
+        text: ".",
+        onclick: () => {
+            appendText('.')
+        },
+      },
+      {
+        text: "0",
+        onclick: () => {
+            appendText(0)
+        },
+      },
+      {
+        text: "清空",
+        onclick: () => {},
+      },
+      {
+        text: "提交",
+        onclick: () => {},
+      },
+    ];
+    
     return () => (
       <>
         <div class={s.dateAndAmount}>
@@ -106,7 +124,7 @@ export const InputPad = defineComponent({
               </Popup>
             </span>
           </span>
-          <div class={s.amount}>1000.00</div>
+          <div class={s.amount}>{refAmount.value}</div>
         </div>
         <div class={s.buttons}>
           {buttons.map((button) => (

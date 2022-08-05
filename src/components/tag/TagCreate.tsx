@@ -1,5 +1,5 @@
 import { defineComponent, reactive, toRaw } from "vue";
-import s from "./TagCreate.module.scss";
+import s from "./Tag.module.scss";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Icon } from "../../shared/Icon";
 import { Button } from "../../shared/Button";

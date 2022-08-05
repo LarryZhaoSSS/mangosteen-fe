@@ -17,7 +17,7 @@ import { TagCreate } from "../components/tag/TagCreate";
 import { TagEdit } from "../components/tag/TagEdit";
 
 export const routes: RouteRecordRaw[] = [
-  { path: "/", redirect: "/welocome" },
+  { path: "/", redirect: "/welcome" },
   {
     path: "/welcome",
     component: Welcome,

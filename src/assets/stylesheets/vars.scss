@@ -1,4 +1,5 @@
 :root {
+  --bg:white;
   --amount-text: #53a867;
   --button-bg: #5c33be;
   --button-bg-danger:#E10505;
@@ -48,4 +49,9 @@
   --total-text: white;
   --total-income: #FE7275;
   --total-expenses: #53A867;
+  --dialog-header-text: white;
+  --overlay-bg: white;
+  --overlay-mask-bg: rgba(0, 0, 0, 0.5);
+  --overlay-user-bg: #5c33be;
+  --overlay-user-text: white;
 }

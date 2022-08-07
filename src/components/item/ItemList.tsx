@@ -1,8 +1,8 @@
 import { Overlay } from "vant";
-import { defineComponent, ref, reactive, watchEffect } from "vue";
+import { defineComponent, ref, reactive } from "vue";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Form, FormItem } from "../../shared/Form";
-import { Icon } from "../../shared/Icon";
+import { OverlayIcon } from "../../shared/Overlay";
 import { Tabs, Tab } from "../../shared/Tabs";
 import { Time } from "../../shared/time";
 import s from "./ItemList.module.scss";
@@ -25,25 +25,27 @@ export const ItemList = defineComponent({
     ];
     const refOverlayVisible = ref(false);
 
-    watchEffect(() => {
-      if (refSelected.value === "自定义时间") {
-        refOverlayVisible.value = true;
-      }
-    });
     const onSubmitCustomTime = (e:Event)=>{
         e.preventDefault()
         refOverlayVisible.value = false
+    }
+    const onSelect = (value:string)=>{
+        if(value === '自定义时间'){
+            refOverlayVisible.value = true
+        }
+        
     }
     return () => (
       <MainLayout>
         {{
           title: () => "山竹记账",
-          icon: () => <Icon name="menu" />,
+          icon: () => <OverlayIcon/>,
           default: () => (
             <>
               <Tabs
                 classPrefix={"cutomTabs"}
                 v-model:selected={refSelected.value}
+                onUpdate:selected={onSelect}
               >
                 <Tab name="本月">
                   <ItemSummary
@@ -87,7 +89,9 @@ export const ItemList = defineComponent({
                       />
                       <FormItem>
                         <div class={s.actions}>
-                          <button type="button">取消</button>
+                          <button type="button" onClick={()=>{
+                              refOverlayVisible.value = false
+                          }}>取消</button>
                           <button type="submit">确认</button>
                         </div>
                       </FormItem>

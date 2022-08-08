@@ -29,13 +29,14 @@ export const FormItem = defineComponent({
     },
     type: {
       type: String as PropType<
-        "text" | "emojiSelect" | "date" | "validationCode"
+        "text" | "emojiSelect" | "date" | "validationCode" | "select"
       >,
     },
     error: {
       type: String,
     },
-    placeholder:String
+    placeholder: String,
+    options: Array as PropType<Array<{ text: string; value: string }>>,
   },
   setup: (props, context) => {
     const refDatePickerVisible = ref(false);
@@ -71,10 +72,31 @@ export const FormItem = defineComponent({
                 onInput={(e: any) =>
                   context.emit("update:modelValue", e.target.value)
                 }
-                class={[s.formItem, s.input, props.error ? s.error : null,s.validationCodeInput]}
+                class={[
+                  s.formItem,
+                  s.input,
+                  props.error ? s.error : null,
+                  s.validationCodeInput,
+                ]}
               />
-              <Button class={[s.formItem,,s.validationCodeButton]}>发送验证码</Button>
+              <Button class={[s.formItem, , s.validationCodeButton]}>
+                发送验证码
+              </Button>
             </>
+          );
+        case "select":
+          return (
+            <select
+              class={[s.formItem, s.select]}
+              value={props.modelValue}
+              onChange={(e) => {
+                context.emit("update:modelValue", (e.target as any).value);
+              }}
+            >
+              {props.options?.map((option) => (
+                <option value={option.value}>{option.text}</option>
+              ))}
+            </select>
           );
         case "date":
           return (
@@ -119,7 +141,7 @@ export const FormItem = defineComponent({
             <div class={s.formItem_value}>{content.value}</div>
             {props.error && (
               <div class={s.formItem_errorHint}>
-                <span>{props.error ?? '　'}</span>
+                <span>{props.error ?? "　"}</span>
               </div>
             )}
           </label>
